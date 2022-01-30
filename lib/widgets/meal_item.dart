@@ -11,14 +11,12 @@ class MealItem extends StatelessWidget {
   final Affordability affordability;
 
   const MealItem(
-      {Key? key,
-      required this.id,
-      required this.title,
-      required this.imageUrl,
-      required this.duration,
-      required this.complexity,
-      required this.affordability})
-      : super(key: key);
+      {@required this.id,
+      @required this.title,
+      @required this.imageUrl,
+      @required this.duration,
+      @required this.complexity,
+      @required this.affordability});
 
   String get complexityText {
     switch (complexity) {
@@ -53,6 +51,7 @@ class MealItem extends StatelessWidget {
   }
 
   void selectMeal(BuildContext context) {
+    // We obtained ID and forward that with pushNamed
     Navigator.of(context).pushNamed(MealDetailScreen.routeName, arguments: id);
   }
 
@@ -61,6 +60,7 @@ class MealItem extends StatelessWidget {
     return InkWell(
       onTap: () => selectMeal(context),
       child: Card(
+        // Shape is used to change the default shape of the card
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 4,
         margin: const EdgeInsets.all(10),
@@ -68,6 +68,7 @@ class MealItem extends StatelessWidget {
           children: [
             Stack(
               children: [
+                // This will help us to cut off, or clip the corners of the image
                 ClipRRect(
                   child: Image.network(
                     imageUrl,
@@ -79,6 +80,7 @@ class MealItem extends StatelessWidget {
                       topLeft: Radius.circular(15),
                       topRight: Radius.circular(15)),
                 ),
+                // Only works in stack and will allow us to position the widget
                 Positioned(
                   bottom: 20,
                   right: 10,
@@ -97,7 +99,7 @@ class MealItem extends StatelessWidget {
                       overflow: TextOverflow.fade,
                     ),
                   ),
-                )
+                ),
               ],
             ),
             Padding(

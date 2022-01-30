@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/screens/categories_screen.dart';
 import 'package:meals_app/screens/category_meals_screen.dart';
+import 'package:meals_app/screens/error_screen.dart';
 import 'package:meals_app/screens/meal_detail_screen.dart';
+import 'package:meals_app/screens/tabs_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,10 +31,18 @@ class MyApp extends StatelessWidget {
                     fontFamily: 'RobotoCondensed',
                     fontWeight: FontWeight.bold),
               )),
-      home: const CategoriesScreen(),
+      // home: const CategoriesScreen(),
       routes: {
+        '/': (ctx) => TabScreen(),
         CatergoryMealsScreen.routeName: (ctx) => CatergoryMealsScreen(),
-        MealDetailScreen.routeName: (ctx) => const MealDetailScreen(),
+        MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
+      },
+      // onGenerateRoute: (settings) {
+      //   print(settings.arguments);
+      // },
+      // In the case where the app has no way to go, this is the 404 error page
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(builder: (ctx) => ErrorScreen());
       },
     );
   }
